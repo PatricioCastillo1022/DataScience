@@ -1,0 +1,68 @@
+SELECT COUNT(id)
+FROM countries
+WHERE continent = 'Africa';
+
+Answer = 56
+
+SELECT SUM(population_years.population)
+FROM population_years
+JOIN countries
+  ON population_years.country_id = countries.id
+WHERE population_years.year = 2005
+	AND countries.continent = 'Oceania';
+  
+Answer = 3266417
+  
+SELECT AVG(population_years.population)
+FROM population_years
+JOIN countries
+  ON population_years.country_id = countries.id
+WHERE population_years.year = 2003
+	AND countries.continent = 'South America';
+ 
+ 
+{Answer = 25.8906514285714}
+
+SELECT min(population_years.population),
+		countries.name
+FROM population_years
+JOIN countries
+	ON population_years.country_id = countries.id
+WHERE population_years.year = 2007
+	and population_years.population is not NULL;
+  
+  
+Answer = 0.00216 - Niue
+
+SELECT countries.name,
+  round(avg(population_years.population), 0)
+FROM population_years
+JOIN countries
+	ON population_years.country_id = countries.id
+WHERE countries.name = 'Poland';
+
+Answer = Poland - 39.0
+
+SELECT count(name)
+FROM countries
+WHERE name like '%The%';
+
+Answer = 4
+
+SELECT countries.continent,
+		round(sum(population_years.population), 2) as 'Population'
+FROM population_years
+JOIN countries
+	on population_years.country_id = countries.id
+WHERE year = 2010
+GROUP by countries.continent
+ORDER by 2 DESC;
+
+Answer = 
+
+Asia	4133.09
+Africa	1015.48
+Europe	723.06
+North America	539.79
+South America	396.58
+Oceania	34.96
